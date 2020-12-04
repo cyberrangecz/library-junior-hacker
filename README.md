@@ -1,22 +1,28 @@
 # Cybersecurity game "Junior hacker training"
 
-This cybersecurity game allows a hands-on demonstration of topics such as network scanning, SSH connections, and password cracking. It is suitable for undergraduate students in computing.
+This cybersecurity game allows a hands-on demonstration and practice of topics such as network scanning, SSH connections, and password cracking. It is suitable for undergraduate students in computing.
+
+The sandbox for the game was generated using the [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator).
 
 ## Requirements
 
 * A standard personal computer or laptop with Windows, Linux, or Mac OS X operating system.
-* At least 4 GB of free RAM and 4 vCPU cores.
+* At least 4 GB of free RAM and 4 vCPU (virtual CPU) cores.
 * At least 20 GB of free disk space.
 * Internet connection.
-* Install the prerequisites for the [Cyber Sandbox Creator tool](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Installation), namely: Vagrant, Ansible, VirtualBox, and have virtualization enabled.
+* Install the prerequisites for the [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Installation), namely: Vagrant, VirtualBox, and have virtualization enabled.
 
 ## Instructions
 
-1. To instantiate the game, clone this repository, open a command-line interface in its root folder, and run the command `vagrant up`. This will set up virtual machines of attacker, server, and client. If you run across any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
+1. Clone this repository locally.
 
-2. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
+2. Open a command-line interface in the repository's root folder.
 
-3. Follow the assignments and the storyline in the `game_design.md` file.
+3. Run the command `vagrant up`. This will instantiate the sandbox for the game. If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
+
+4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
+
+5. Follow the assignments and the storyline in the `game_design.md` file.
 
 ## License
 
