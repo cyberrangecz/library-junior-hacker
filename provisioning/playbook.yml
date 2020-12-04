@@ -1,0 +1,20 @@
+---
+# Basic configuration of all defined devices
+
+# Installation of common tools at all hosts
+- name: Configuring hosts
+  hosts: hosts
+  become: yes
+  roles:
+    - hosts
+
+# Installation and configuration of each host
+- name: Configuring devices separately
+  hosts: all
+  become: yes
+  tasks:
+  - name: include role
+    include_role:
+      name: "{{ inventory_hostname }}"
+
+

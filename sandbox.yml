@@ -1,0 +1,67 @@
+name: junior-hacker-sandbox
+
+provider: OpenStack
+
+hosts:
+  - name: attacker
+    base_box: 
+      image: kali-linux-2019.4-amd64
+      man_user: debian
+    flavor: csirtmu.tiny1x2
+
+  - name: server
+    base_box: 
+      image: debian-10-x86_64
+      man_user: debian
+    flavor: csirtmu.tiny1x2
+
+  - name: client
+    base_box: 
+      image: debian-10-x86_64
+      man_user: debian
+    flavor: csirtmu.tiny1x2
+
+routers:
+  - name: router
+    cidr: 100.100.100.0/29
+    base_box:
+      image: debian-9-x86_64
+      man_user: debian
+    flavor: standard.small
+
+networks:
+  - name: attacker-switch
+    cidr: 10.1.26.0/8
+
+  - name: server-switch
+    cidr: 10.1.26.0/8
+
+  - name: client-switch
+    cidr: 10.1.26.0/8
+
+net_mappings:
+    - host: attacker
+      network: attacker-switch
+      ip: 10.1.26.23
+    - host: server
+      network: server-switch
+      ip: 10.1.26.9
+    - host: client
+      network: client-switch
+      ip: 10.1.26.4
+
+router_mappings:
+    - router: router
+      network: attacker-switch
+      ip: 10.1.26.1
+    - router: router
+      network: server-switch
+      ip: 10.1.26.2
+    - router: router
+      network: client-switch
+      ip: 10.1.26.3
+
+groups:
+  - name: user-accessible
+    nodes:
+      - attacker
