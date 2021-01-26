@@ -1,0 +1,7 @@
+# The line below should be in global config, or in the file with highest priority (lowest filename).
+$RepeatedMsgReduction off 
+
+# template
+$template KYPOSANDBOXFORWARDER,"<34>1 %TIMESTAMP:::date-rfc3339% %HOSTNAME% %APP-NAME% %PROCID% %MSGID% [kypo sandbox_name=\"{{ kslf_sandbox_name }}\" pool_id=\"{{ kslf_pool_id }}\" sandbox_id=\"{{ kslf_sandbox_id }}\"] %msg%\n"
+# redirect to man
+*.*  @@{{ kslf_man_ip }}:{{ kslf_syslog_target_port }};KYPOSANDBOXFORWARDER

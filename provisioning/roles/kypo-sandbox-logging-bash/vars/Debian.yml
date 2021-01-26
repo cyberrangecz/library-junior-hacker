@@ -1,0 +1,4 @@
+---
+kslb_syslog_usr: debian
+kslb_syslog_grp: debian
+kslb_interface_name: eth1

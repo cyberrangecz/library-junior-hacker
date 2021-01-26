@@ -1,0 +1,4 @@
+---
+kslm_syslog_usr: ubuntu  
+kslm_syslog_grp: ubuntu
+kslm_interface_name: enp0s8

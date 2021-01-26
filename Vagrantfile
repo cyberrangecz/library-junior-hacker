@@ -41,6 +41,17 @@ Vagrant.configure("2") do |config|
     device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
   end
 
+  # device (host): logger
+  config.vm.define "logger" do |device|
+    device.vm.hostname = "logger"
+    device.vm.box = "generic/debian10"
+    device.vm.provider "virtualbox" do |provider|
+      provider.memory = 512
+      provider.cpus = 1
+    end
+    device.vm.network :private_network, ip: "10.1.26.100", netmask: "16", virtualbox__intnet: "net"
+    device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
+  end
 
   # basic configuration of devices and networks
   config.vm.provision :ansible_local do |provisioner|

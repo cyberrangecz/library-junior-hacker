@@ -1,0 +1,12 @@
+#Loads modules
+module(load="imfile")
+
+#Adds all possible metasploit history files to gather input from
+{% for home in (getent_passwd.values() | sum(start=[]))[4::6] | list | unique %}
+input(type="imfile"
+      File="{{ home }}/.msf4/history"
+      Tag="msf.command:"
+      Severity="info"
+      PersistStateInterval="1"
+)
+{% endfor %}

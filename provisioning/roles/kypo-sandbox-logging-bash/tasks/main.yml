@@ -1,0 +1,25 @@
+---
+# tasks file for rsysloging-client
+
+- name: Include os variables
+  include_vars: "{{ansible_os_family}}.yml"
+    
+- include: bash.yml
+
+# RSyslog config
+- name: "getent passwd"
+  getent:
+    database: passwd
+
+- name: "Change to root ownership of syslog. This is to make sure auditd starts properly."
+  file:
+    path: /var/log/syslog
+    owner: root
+    group: root
+  become: yes
+
+- name: "Restart rsyslog service"
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: yes

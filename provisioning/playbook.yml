@@ -17,4 +17,76 @@
     include_role:
       name: "{{ inventory_hostname }}"
 
+# Enable logging
+- hosts: attacker
+  become: true
+  pre_tasks:
+    - name: "Start and enable NTP service for time sync"
+      service:
+        name: ntp
+        state: started
+        enabled: yes
 
+- name: Add MAN IP Fact
+  hosts: logger
+  gather_facts: no
+  tasks:
+    - set_fact:
+        man_ip_address: '10.1.26.100'
+
+- name: setup logging
+  hosts:
+    - attacker
+    - server
+    - client
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: 1 }
+    - role: kypo-sandbox-logging-bash
+    - role: kypo-sandbox-logging-msf
+
+- name: setup logging
+  hosts: logger
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: 1 }
+
+- name: Fix BASH logging for root at attacker
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: "Source all of ~/.bashrc.d/* to .bashrc"
+      blockinfile:
+       dest: "/etc/bash.bashrc"
+       block: |
+          if [ -d /etc/bashrc.d ]; then
+          for f in /etc/bashrc.d/*.sh; do
+              if [ -r $f ]; then
+                  . $f
+              fi
+          done
+          unset f
+          fi
+       marker: '# {mark} source bashrc.d'
+       insertafter: EOF
+       create: no
+    - name: Ensures /etc/bashrc.d/ exists
+      file:
+        path: "/etc/bashrc.d/"
+        state: "directory"
+    - name: "Setup bash command monitoring"
+      copy:
+        src: /etc/profile.d/log_commands.sh
+        dest: /etc/bashrc.d/log_commands.sh
+        remote_src: yes
+        mode: 0644
+    - name: "Add history configuration to /etc/bashrc.d/history.sh"
+      copy:
+        src: /etc/profile.d/history.sh
+        dest: /etc/bashrc.d/history.sh
+        remote_src: yes
+        mode: 0755

@@ -1,0 +1,7 @@
+---
+- name: kslf_rsyslog_restart
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: yes
+
