@@ -41,9 +41,9 @@ Vagrant.configure("2") do |config|
     device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
   end
 
-  # device (host): logger
-  config.vm.define "logger" do |device|
-    device.vm.hostname = "logger"
+  # device (host): man
+  config.vm.define "man" do |device|
+    device.vm.hostname = "man"
     device.vm.box = "generic/debian10"
     device.vm.provider "virtualbox" do |provider|
       provider.memory = 512

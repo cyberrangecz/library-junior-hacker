@@ -27,8 +27,16 @@
         state: started
         enabled: yes
 
+- hosts: attacker
+  become: true
+  tasks:
+    - name: Set DNS server on attacker
+      lineinfile:
+        path: /etc/resolv.conf
+        line: "nameserver 8.8.8.8"
+
 - name: Add MAN IP Fact
-  hosts: logger
+  hosts: man
   gather_facts: no
   tasks:
     - set_fact:
@@ -48,10 +56,24 @@
     - role: kypo-sandbox-logging-msf
 
 - name: Run syslog server
-  hosts: logger
+  hosts: man
   become: yes
   roles:
-    - { role: kypo-man-logging-forward, kmlf_syslog_target_host: '0.0.0.0'}
+    - { role: kypo-man-logging-forward, kmlf_syslog_target_host: '78.128.251.179'}
+
+- hosts: man
+  become: true
+  tasks:
+    - name: Replace the version of syslog-ng on MAN
+      replace:
+        path: /etc/syslog-ng/syslog-ng.conf
+        regexp: '28'
+        replace: '19'
+    - name: Restart the syslog-ng service
+      service:
+        name: syslog-ng
+        state: restarted
+        enabled: yes
 
 - name: Fix BASH logging for root at attacker
   hosts: attacker
