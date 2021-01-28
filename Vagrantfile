@@ -62,6 +62,8 @@ Vagrant.configure("2") do |config|
     provisioner.extra_vars = {
       ansible_python_interpreter: "/usr/bin/python3",
     }
+    provisioner.raw_arguments = Shellwords.shellsplit(ENV['ANSIBLE_ARGS']) if ENV['ANSIBLE_ARGS']
+    # provisioner.verbose = "vvv"
   end
 
 end

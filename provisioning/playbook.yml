@@ -50,8 +50,10 @@
   gather_facts: yes
   become: yes
   become_user: root
+  vars:
+    student_id: 0
   roles:
-    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: 1 }
+    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: "{{ student_id }}" }
     - role: kypo-sandbox-logging-bash
     - role: kypo-sandbox-logging-msf
 

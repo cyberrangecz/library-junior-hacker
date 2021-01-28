@@ -18,7 +18,7 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 
 2. Open a command-line interface in the repository's root folder.
 
-3. Run the command `vagrant up`. This will instantiate the sandbox for the game. If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
+3. Run the command `vagrant up`. This will instantiate the sandbox for the game. If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips. If you need to define any Ansible variables, use `ANSIBLE_ARGS` when Ansible is executed, such as `ANSIBLE_ARGS='--extra-vars "student_id=12345"' vagrant up`.
 
 4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
 
@@ -38,4 +38,4 @@ This project is licensed under the [MIT license](LICENSE) for the code (Vagrant 
 
 **Contributors/Consultants:** Valdemar Švábenský, Jan Vykopal
 
-Feel free to contact [Valdemar Švábenský](mailto:svabensky@ics.muni.cz?subject=Junior%20Hacker%20Cybersecurity%20Game) if you have any feedback or suggestions. Also, the hints, solutions, and flag values for the game are available on request. 
+Feel free to contact [Valdemar Švábenský](mailto:svabensky@ics.muni.cz?subject=Junior%20Hacker%20Cybersecurity%20Game) if you have any feedback or suggestions. Also, the hints, solutions, and flag values for the game are available on request.
