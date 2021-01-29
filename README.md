@@ -18,7 +18,12 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 
 2. Open a command-line interface in the repository's root folder.
 
-3. Run the command `vagrant up`. This will instantiate the sandbox for the game. If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips. If you need to define any Ansible variables, use `ANSIBLE_ARGS` when Ansible is executed, such as `ANSIBLE_ARGS='--extra-vars "student_id=12345"' vagrant up`.
+3. Run the command `vagrant up`. This will instantiate the sandbox for the game.
+	* If you need to define any Ansible variables, use `ANSIBLE_ARGS` when Ansible is executed:\
+	On Linux/Mac: `ANSIBLE_ARGS='--extra-vars "student_id=12345"' vagrant up`\
+	On Windows in Powershell: `$Env:ANSIBLE_ARGS='--extra-vars "student_id=12345"' ; vagrant up`\
+	Replace `12345` with your desired value.
+	* If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
 
 4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
 

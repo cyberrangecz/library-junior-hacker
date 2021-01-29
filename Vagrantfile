@@ -5,6 +5,18 @@
 
 Vagrant.configure("2") do |config|
 
+  # device (host): man
+  config.vm.define "man" do |device|
+    device.vm.hostname = "man"
+    device.vm.box = "generic/debian10"
+    device.vm.provider "virtualbox" do |provider|
+      provider.memory = 512
+      provider.cpus = 1
+    end
+    device.vm.network :private_network, ip: "10.1.26.100", netmask: "16", virtualbox__intnet: "net"
+    device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
+  end
+
   # device (host): attacker
   config.vm.define "attacker" do |device|
     device.vm.hostname = "attacker"
@@ -41,18 +53,6 @@ Vagrant.configure("2") do |config|
     device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
   end
 
-  # device (host): man
-  config.vm.define "man" do |device|
-    device.vm.hostname = "man"
-    device.vm.box = "generic/debian10"
-    device.vm.provider "virtualbox" do |provider|
-      provider.memory = 512
-      provider.cpus = 1
-    end
-    device.vm.network :private_network, ip: "10.1.26.100", netmask: "16", virtualbox__intnet: "net"
-    device.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
-  end
-
   # basic configuration of devices and networks
   config.vm.provision :ansible_local do |provisioner|
     provisioner.playbook = "provisioning/playbook.yml"
@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
       ansible_python_interpreter: "/usr/bin/python3",
     }
     provisioner.raw_arguments = Shellwords.shellsplit(ENV['ANSIBLE_ARGS']) if ENV['ANSIBLE_ARGS']
-    # provisioner.verbose = "vvv"
+    #provisioner.verbose = "vvv"
   end
 
 end
