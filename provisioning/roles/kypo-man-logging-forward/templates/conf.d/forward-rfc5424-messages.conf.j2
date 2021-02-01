@@ -41,7 +41,12 @@ destination d_kypo_head {
     network(
         "{{ kmlf_syslog_target_host }}"
         port({{ kmlf_syslog_target_port }})
-        transport(tcp)
+        transport("tls")
+        tls(
+            key-file("/etc/syslog-ng/cert.d/clientkey.pem")
+            cert-file("/etc/syslog-ng/cert.d/clientcert.pem")
+            ca-dir("/etc/syslog-ng/ca.d")
+        )
         ip-protocol(4)
         flags(syslog-protocol)
     );

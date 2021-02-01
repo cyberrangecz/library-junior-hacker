@@ -30,3 +30,9 @@
     dest: /etc/syslog-ng/ca.d/cacert.pem
   become: yes
 
+- name: "Create symbolic link to ca-cert"
+  file:
+    src: /etc/syslog-ng/ca.d/cacert.pem
+    dest: /etc/syslog-ng/ca.d/07e1da70.0
+    state: link
+  become: yes
