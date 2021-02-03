@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "man"
     device.vm.box = "generic/debian10"
     device.vm.provider "virtualbox" do |provider|
-      provider.memory = 512
+      provider.memory = 256
       provider.cpus = 1
     end
     device.vm.network :private_network, ip: "10.1.26.100", netmask: "16", virtualbox__intnet: "net"
@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "server"
     device.vm.box = "generic/debian10"
     device.vm.provider "virtualbox" do |provider|
-      provider.memory = 512
+      provider.memory = 256
       provider.cpus = 1
     end
     device.vm.network :private_network, ip: "10.1.26.9", netmask: "16", virtualbox__intnet: "net"
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "client"
     device.vm.box = "generic/debian10"
     device.vm.provider "virtualbox" do |provider|
-      provider.memory = 512
+      provider.memory = 256
       provider.cpus = 1
     end
     device.vm.network :private_network, ip: "10.1.26.4", netmask: "16", virtualbox__intnet: "net"

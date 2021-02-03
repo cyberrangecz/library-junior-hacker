@@ -18,13 +18,15 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 
 2. Open a command-line interface in the repository's root folder.
 
-3. Run the command `vagrant up`. This will instantiate the sandbox for the game.
-	* If you need to define any Ansible variables, use `ANSIBLE_ARGS` when Ansible is executed:\
+3. On Linux/Mac, run the command `start.sh <your student ID>`.\
+   On Windows, TODO.\
+   This will instantiate the sandbox for the game.
+	* The wrapper runs the command `vagrant up` with Ansible variable `ANSIBLE_ARGS`:\
 	On Linux/Mac: `ANSIBLE_ARGS='--extra-vars "student_id=12345"' vagrant up`\
 	On Windows in Powershell: `$Env:ANSIBLE_ARGS='--extra-vars "student_id=12345"' ; vagrant up`\
 	Replace `12345` with your desired value.
+	* This stage can take some time, please be patient :) The first setup might take up to an hour (depending on your Internet connection speed) to download the Vagrant boxes. Each subsequent setup should take 10 to 20 minutes.
 	* If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
-	* This stage can take some time, please be patient :) The first setup might take up to an hour (depending on your Internet connection speed) to download the Vagrant boxes. Each subsequent setup should take 20 to 30 minutes.
 
 4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
 
