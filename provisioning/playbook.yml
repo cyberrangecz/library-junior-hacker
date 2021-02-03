@@ -17,4 +17,105 @@
     include_role:
       name: "{{ inventory_hostname }}"
 
+# Enable logging
+- hosts: attacker
+  become: true
+  pre_tasks:
+    - name: "Start and enable NTP service for time sync"
+      service:
+        name: ntp
+        state: started
+        enabled: yes
 
+- hosts: attacker
+  become: true
+  tasks:
+    - name: Set DNS server on attacker
+      lineinfile:
+        command: wget -q -0 - https://archive.kali.org/archive-key.asc | sudo apt-key add
+
+- hosts: attacker
+  become: true
+  tasks:
+    - name: Hotfix of keys
+      lineinfile:
+        path: /etc/resolv.conf
+        line: "nameserver 8.8.8.8"
+
+- name: Add MAN IP Fact
+  hosts: man
+  gather_facts: no
+  tasks:
+    - set_fact:
+        man_ip_address: '10.1.26.100'
+
+- name: setup logging
+  hosts:
+    - attacker
+    - server
+    - client
+  gather_facts: yes
+  become: yes
+  become_user: root
+  vars:
+    student_id: 0
+  roles:
+    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: "{{ student_id }}" }
+    - role: kypo-sandbox-logging-bash
+    - role: kypo-sandbox-logging-msf
+
+- name: Run syslog server
+  hosts: man
+  become: yes
+  roles:
+    - { role: kypo-man-logging-forward, kmlf_syslog_target_host: '78.128.251.179'}
+
+- hosts: man
+  become: true
+  tasks:
+    - name: Replace the version of syslog-ng on MAN
+      replace:
+        path: /etc/syslog-ng/syslog-ng.conf
+        regexp: '28'
+        replace: '19'
+    - name: Restart the syslog-ng service
+      service:
+        name: syslog-ng
+        state: restarted
+        enabled: yes
+
+- name: Fix BASH logging for root at attacker
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: "Source all of ~/.bashrc.d/* to .bashrc"
+      blockinfile:
+       dest: "/etc/bash.bashrc"
+       block: |
+          if [ -d /etc/bashrc.d ]; then
+          for f in /etc/bashrc.d/*.sh; do
+              if [ -r $f ]; then
+                  . $f
+              fi
+          done
+          unset f
+          fi
+       marker: '# {mark} source bashrc.d'
+       insertafter: EOF
+       create: no
+    - name: Ensures /etc/bashrc.d/ exists
+      file:
+        path: "/etc/bashrc.d/"
+        state: "directory"
+    - name: "Setup bash command monitoring"
+      copy:
+        src: /etc/profile.d/log_commands.sh
+        dest: /etc/bashrc.d/log_commands.sh
+        remote_src: yes
+        mode: 0644
+    - name: "Add history configuration to /etc/bashrc.d/history.sh"
+      copy:
+        src: /etc/profile.d/history.sh
+        dest: /etc/bashrc.d/history.sh
+        remote_src: yes
+        mode: 0755

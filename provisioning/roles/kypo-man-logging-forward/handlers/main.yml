@@ -1,0 +1,3 @@
+---
+- name: kmlf_syslogng_restart
+  command: /etc/init.d/syslog-ng restart

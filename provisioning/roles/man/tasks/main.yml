@@ -1,0 +1,38 @@
+---
+
+- name: "Ensure directories exist"
+  file:
+    path: "/etc/syslog-ng/cert.d"
+    recurse: yes
+    state: directory
+
+- name: "Ensure directories exist"
+  file:
+    path: "/etc/syslog-ng/ca.d"
+    recurse: yes
+    state: directory
+
+- name: "Copy client-key for syslog"
+  copy:
+    src: clientkey.pem
+    dest: /etc/syslog-ng/cert.d/clientkey.pem
+  become: yes
+
+- name: "Copy client-cert for syslog"
+  copy:
+    src: clientcert.pem
+    dest: /etc/syslog-ng/cert.d/clientcert.pem
+  become: yes
+
+- name: "Copy ca-cert for syslog"
+  copy:
+    src: cacert.pem
+    dest: /etc/syslog-ng/ca.d/cacert.pem
+  become: yes
+
+- name: "Create symbolic link to ca-cert"
+  file:
+    src: /etc/syslog-ng/ca.d/cacert.pem
+    dest: /etc/syslog-ng/ca.d/07e1da70.0
+    state: link
+  become: yes

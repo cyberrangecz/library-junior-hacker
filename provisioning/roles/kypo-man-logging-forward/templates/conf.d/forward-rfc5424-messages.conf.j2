@@ -1,0 +1,61 @@
+options {
+	keep-hostname(yes);
+};
+
+# EVENTS log source (with default 300 number of connections, if there will be more sandboxes then it will be essential to extend that number)
+source s_host {
+    network(
+       ip(0.0.0.0) 
+       port(514) 
+       transport(tcp)
+       flags(syslog-protocol)
+       max-connections(300)
+    );
+};
+
+rewrite r_rewrite_set {
+    set("$FULLHOST_FROM", value(".SDATA.kypo.fromhost_ip"));
+};
+
+# EVENTS log destination
+{% if kmlf_syslog_target_host == "0.0.0.0" %}
+destination d_man_logs {
+    file( 
+        "/data/idm-logs/man.log"
+        create-dirs(yes)
+        owner("root")
+        group("root")
+        perm(0777)
+    );
+};
+
+# EVENTS log pairing
+log {
+    source(s_host);
+    rewrite(r_rewrite_set);
+    destination(d_man_logs);
+};
+
+{% else %}
+destination d_kypo_head {
+    network(
+        "{{ kmlf_syslog_target_host }}"
+        port({{ kmlf_syslog_target_port }})
+        transport("tls")
+        tls(
+            key-file("/etc/syslog-ng/cert.d/clientkey.pem")
+            cert-file("/etc/syslog-ng/cert.d/clientcert.pem")
+            ca-dir("/etc/syslog-ng/ca.d")
+        )
+        ip-protocol(4)
+        flags(syslog-protocol)
+    );
+};
+
+# EVENTS Log pairing
+log {
+    source(s_host);
+    rewrite(r_rewrite_set);
+    destination(d_kypo_head);
+};
+{% endif %}
