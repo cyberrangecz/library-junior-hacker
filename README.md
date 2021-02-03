@@ -18,19 +18,25 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 
 2. Open a command-line interface in the repository's root folder.
 
-3. On Linux/Mac, run the command `start.sh <your student ID>`.\
-   On Windows, TODO.\
+3. On Linux/Mac, run the Bash script `./start.sh <your student ID>`.\
+   On Windows, run the Powershell script `.\start.ps1 <your student ID>`.
    This will instantiate the sandbox for the game.
-	* The wrapper runs the command `vagrant up` with Ansible variable `ANSIBLE_ARGS`:\
-	On Linux/Mac: `ANSIBLE_ARGS='--extra-vars "student_id=12345"' vagrant up`\
-	On Windows in Powershell: `$Env:ANSIBLE_ARGS='--extra-vars "student_id=12345"' ; vagrant up`\
-	Replace `12345` with your desired value.
 	* This stage can take some time, please be patient :) The first setup might take up to an hour (depending on your Internet connection speed) to download the Vagrant boxes. Each subsequent setup should take 10 to 20 minutes.
 	* If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
 
 4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
 
 5. Follow the assignments and the storyline in the `game_design.md` file.
+
+## Information about data collection for research
+
+We would like to ask for your consent to use anonymized data from solving the game tasks for academic research. After you create and access the game sandbox, we may collect the shell commands that you executed in the sandbox, as well the following metadata: timestamp of the command execution, working directory, username, IP address of the machine in the sandbox, and IP address of the hosting computer. After you finish playing, your personal data will be irreversibly anonymized and further used only for scientific and research purposes. By building the sandbox from this repository, you agree to these conditions.
+
+If you require more information, you can:
+* Read about our research on the website of [Cybersecurity Laboratory](https://kypo.fi.muni.cz).
+* Investigate the contents of this open-source repository, to check the data collection implementation for yourself.
+* Contact us if you have any further questions (see the Credits and contact section below).
+If for any reason you still feel uncomfortable with this, you can play the [plain version of the game](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/junior-hacker/-/tree/version-without-command-logging) that does not contain any logging modules. However, it would help our work tremendously if you chose this version. Thank you :)
 
 ## License
 

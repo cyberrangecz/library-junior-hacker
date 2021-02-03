@@ -32,6 +32,13 @@
   tasks:
     - name: Set DNS server on attacker
       lineinfile:
+        command: wget -q -0 - https://archive.kali.org/archive-key.asc | sudo apt-key add
+
+- hosts: attacker
+  become: true
+  tasks:
+    - name: Hotfix of keys
+      lineinfile:
         path: /etc/resolv.conf
         line: "nameserver 8.8.8.8"
 
