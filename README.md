@@ -36,6 +36,7 @@ If you require more information, you can:
 * Read about our research on the website of [Cybersecurity Laboratory](https://kypo.fi.muni.cz).
 * Investigate the contents of this open-source repository, to check the data collection implementation for yourself.
 * Contact us if you have any further questions (see the Credits and contact section below).
+
 If for any reason you still feel uncomfortable with this, you can play the [plain version of the game](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/junior-hacker/-/tree/version-without-command-logging) that does not contain any logging modules. However, it would help our work tremendously if you chose this version. Thank you :)
 
 ## License
@@ -52,4 +53,4 @@ This project is licensed under the [MIT license](LICENSE) for the code (Vagrant 
 
 **Contributors/Consultants:** Valdemar Švábenský, Jan Vykopal
 
-Feel free to contact [Valdemar Švábenský](mailto:svabensky@ics.muni.cz?subject=Junior%20Hacker%20Cybersecurity%20Game) if you have any feedback or suggestions. Also, the hints, solutions, and flag values for the game are available on request.
+Feel free to contact [Valdemar Švábenský](mailto:svabensky@ics.muni.cz?subject=Junior%20Hacker%20Cybersecurity%20Game) if you have any feedback, questions, or suggestions. Also, the hints, solutions, and flag values for the game are available on request.
