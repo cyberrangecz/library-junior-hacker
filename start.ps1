@@ -11,4 +11,3 @@ else
     $Env:ANSIBLE_ARGS='--extra-vars "student_id={0}"' -f $id
     vagrant up
 }
-
