@@ -7,7 +7,7 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 ## Requirements
 
 * A standard personal computer or laptop with Windows, Linux, or Mac OS X operating system.
-* At least 4 GB of free RAM and 4 vCPU (virtual CPU) cores.
+* At least 8 GB of free RAM and 4 vCPU (virtual CPU) cores.
 * At least 20 GB of free disk space.
 * Internet connection.
 * Install the prerequisites for the [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Installation), namely: Vagrant, VirtualBox, and have virtualization enabled.

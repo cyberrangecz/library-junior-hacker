@@ -22,7 +22,7 @@ log-command() {
 	declare command=$(fc -ln -1 | sed -r 's/^[[:blank:]]*//g'  | sed -e 's/[[:space:]]*$//' | escape-str)
     declare wd=$(realpath "$(pwd)" | escape-str)
 	if [ -n "$command" ]; then
-    			logger -p syslog.info -t bash.command "{\"cmd\":\"$command\", \"uname\":\"$(echo $USER | escape-str)\", \"wd\":\"$wd\"}"
+    			logger -p syslog.info -t bash.command "{\"cmd\":\"$command\", \"username\":\"$(echo $USER | escape-str)\", \"wd\":\"$wd\"}"
 	fi
 }
 
