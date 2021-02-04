@@ -7,6 +7,8 @@ if ( $Args.Count -ne 1 )
 }
 else
 {
-    $Env:ANSIBLE_ARGS='--extra-vars "student_id=$($args[0])"' ; vagrant up
+	$id = $($args[0])
+    $Env:ANSIBLE_ARGS='--extra-vars "student_id={0}"' -f $id
+    vagrant up
 }
 
