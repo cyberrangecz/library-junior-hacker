@@ -1,6 +1,6 @@
 # Cybersecurity game "Junior hacker training"
 
-This cybersecurity game allows a hands-on demonstration and practice of topics such as network scanning, SSH connections, and password cracking. It is suitable for undergraduate students in computing.
+This cybersecurity game allows a **hands-on demonstration and practice** of topics such as network scanning, SSH connections, and password cracking. It is suitable for undergraduate students in computing.
 
 The sandbox for the game was generated using the [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator).
 
@@ -14,23 +14,24 @@ The sandbox for the game was generated using the [Cyber Sandbox Creator](https:/
 
 ## Instructions
 
-1. Clone this repository locally.
+1. **Clone this repository** locally.
 
-2. Open a command-line interface in the repository's root folder.
+2. **Open a command-line interface** in the repository's root folder.
 
 3. On Linux/Mac, run the Bash script `./start.sh <your student ID>`.\
    On Windows, run the Powershell script `.\start.ps1 <your student ID>`.\
-   This will instantiate the sandbox for the game. The student ID should be a unique number at your institution.
+   This will **instantiate the sandbox** for the game. The student ID should be a **unique number** at your institution.
 	* This stage can take some time, please be patient :) The first setup might take up to an hour (depending on your Internet connection speed) to download the operating system boxes for Vagrant. Each subsequent setup should take from 10 to 20 minutes.
 	* If you experience any technical issues at this stage, check out the [Cyber Sandbox Creator wiki](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/Known-Issues) for troubleshooting tips.
 
-4. Log into the attacker machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
 
-5. Follow the assignments and the storyline in the `game_design.md` file (or your institution's instance of CTFd or a similar platform).
+4. **Log into the attacker** machine: either via VirtualBox GUI using the login `root` and password `toor`, or via the command `vagrant ssh attacker` and escalate your privileges to `root`.
+
+5. **Follow the assignments** and the storyline in the `game_design.md` file (or your institution's instance of CTFd or a similar platform).
 
 ## Information about data collection for research
 
-We would like to ask for your consent to use anonymized data from solving the game tasks for academic research. After you create and access the game sandbox, we may collect the shell commands that you execute in the sandbox, as well the following metadata: timestamp of the command execution, working directory, username within the Vagrant box, IP address of the machine in the sandbox, and IP address of the hosting computer. After you finish playing, your personal data will be irreversibly anonymized and further used only for scientific and research purposes. By building the sandbox from this repository, you agree to these conditions.
+We would like to ask for your consent to use **anonymized data** from solving the game tasks for **academic research**. After you create and access the game sandbox, we may collect the **shell commands** that you execute in the sandbox, as well the following metadata: timestamp of the command execution, working directory, username within the Vagrant box, IP address of the machine in the sandbox, and IP address of the hosting computer. After you finish playing, your personal data will be irreversibly anonymized and further used only for scientific and research purposes. By building the sandbox from this repository, you agree to these conditions.
 
 If you require more information, you can:
 * Read about our research on the website of [Cybersecurity Laboratory](https://kypo.fi.muni.cz).
