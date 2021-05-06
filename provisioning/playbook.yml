@@ -57,7 +57,11 @@
   vars:
     student_id: 0
   roles:
-    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: "{{ student_id }}" }
+    - role: kypo-sandbox-logging-forward
+      kslf_sandbox_name: 'junior-hacker-local'
+      kslf_man_ip: '10.1.26.100'
+      kslf_pool_id: 1
+      kslf_sandbox_id: "{{ student_id }}"
     - role: kypo-sandbox-logging-bash
     - role: kypo-sandbox-logging-msf
 
@@ -65,7 +69,8 @@
   hosts: man
   become: yes
   roles:
-    - { role: kypo-man-logging-forward, kmlf_syslog_target_host: '78.128.251.179'}
+    - role: kypo-man-logging-forward
+      kmlf_syslog_target_host: '78.128.251.179'
 
 - hosts: man
   become: true
