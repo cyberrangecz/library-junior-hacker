@@ -31,7 +31,7 @@ routers:
 
 networks:
   - name: switch
-    cidr: 10.1.26.0/8
+    cidr: 10.1.26.0/24
 
 net_mappings:
     - host: attacker
