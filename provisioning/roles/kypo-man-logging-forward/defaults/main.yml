@@ -1,4 +1,0 @@
-kmlf_required_vars:
- kmlf_syslog_target_host: '{{ kmlf_syslog_target_host }}'
-
-kmlf_syslog_target_port: "515"

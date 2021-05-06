@@ -1,7 +1,0 @@
----
-kslf_required_vars:
-  - kslf_sandbox_name
-  - kslf_man_ip  
-  - kslf_pool_id
-  - kslf_sandbox_id
-kslf_syslog_target_port: "514"
