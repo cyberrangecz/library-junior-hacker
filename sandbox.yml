@@ -6,7 +6,7 @@ hosts:
   - name: attacker
     base_box: 
       image: kali-2020.4
-      man_user: kali
+      man_user: debian
     flavor: csirtmu.tiny1x2
 
   - name: server
