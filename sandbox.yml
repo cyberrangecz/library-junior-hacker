@@ -48,12 +48,6 @@ router_mappings:
     - router: router
       network: switch
       ip: 10.1.26.1
-    - router: router
-      network: switch
-      ip: 10.1.26.2
-    - router: router
-      network: switch
-      ip: 10.1.26.3
 
 groups:
   - name: user-accessible
