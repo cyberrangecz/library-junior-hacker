@@ -27,7 +27,7 @@ routers:
     base_box:
       image: debian-9-x86_64
       man_user: debian
-    flavor: standard.small
+    flavor: csirtmu.tiny1x2
 
 networks:
   - name: switch
