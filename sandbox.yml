@@ -5,8 +5,8 @@ provider: OpenStack
 hosts:
   - name: attacker
     base_box: 
-      image: kali-linux-2019.4-amd64
-      man_user: debian
+      image: kali-2020.4
+      man_user: kali
     flavor: csirtmu.tiny1x2
 
   - name: server
