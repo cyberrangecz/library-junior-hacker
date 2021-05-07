@@ -10,7 +10,7 @@
 
 # Installation and configuration of each host
 - name: Configuring devices separately
-  hosts: all
+  hosts: hosts
   become: yes
   tasks:
   - name: include role
