@@ -12,3 +12,9 @@
   src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/sandbox-logging-forward.git
   scm: git
   version: 1.0.0
+
+- name: chrony
+  src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/chrony.git
+  scm: git
+  version: 1.0.0
+

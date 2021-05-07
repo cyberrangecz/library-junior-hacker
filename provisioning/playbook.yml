@@ -20,12 +20,8 @@
 # Enable logging
 - hosts: attacker
   become: true
-  pre_tasks:
-    - name: "Start and enable NTP service for time sync"
-      service:
-        name: ntp
-        state: started
-        enabled: yes
+  roles:
+      - chrony
 
 - hosts: attacker
   become: true
