@@ -35,13 +35,6 @@
         url: https://archive.kali.org/archive-key.asc
         state: present
 
-- name: Add MAN IP Fact
-  hosts: man
-  gather_facts: no
-  tasks:
-    - set_fact:
-        man_ip_address: '{{ ansible_host }}'
-
 - name: setup logging bash
   hosts:
     - attacker
@@ -52,12 +45,14 @@
   become_user: root
   vars:
     student_id: 0
+    sandbox_name: junior-hacker-local
+    local_man_ip: 10.1.26.100
   roles:
     - role: sandbox-logging-forward
-      slf_destination: '{{ hostvars["man"].man_ip_address }}'
+      slf_destination: '{{ hostvars["man"].ansible_host | default(local_man_ip) }}'
       slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id | default(student_id) }}"
-      slf_sandbox_name: '{{ kypo_global_sandbox_name }}'
-      slf_pool_id: '{{ kypo_global_pool_id }}'
+      slf_sandbox_name: '{{ kypo_global_sandbox_name | default(sandbox_name) }}'
+      slf_pool_id: '{{ kypo_global_pool_id | default(None) }}'
     - role: sandbox-logging-bash
 
 - name: setup logging msf
