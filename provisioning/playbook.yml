@@ -42,7 +42,7 @@
     - set_fact:
         man_ip_address: '{{ ansible_host }}'
 
-- name: setup logging
+- name: setup logging bash
   hosts:
     - attacker
     - server
@@ -55,10 +55,18 @@
   roles:
     - role: sandbox-logging-forward
       slf_destination: '{{ hostvars["man"].man_ip_address }}'
-      slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id }}"
+      slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id | default(student_id) }}"
       slf_sandbox_name: '{{ kypo_global_sandbox_name }}'
       slf_pool_id: '{{ kypo_global_pool_id }}'
     - role: sandbox-logging-bash
+
+- name: setup logging msf
+  hosts:
+    - attacker
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
     - role: sandbox-logging-msf
 
 - hosts: man
