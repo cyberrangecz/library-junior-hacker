@@ -20,11 +20,6 @@
 # Enable logging
 - hosts: attacker
   become: true
-  roles:
-      - chrony
-
-- hosts: attacker
-  become: true
   tasks:
     - name: Set DNS server on attacker
       lineinfile:
@@ -34,6 +29,11 @@
       apt_key:
         url: https://archive.kali.org/archive-key.asc
         state: present
+
+- hosts: attacker
+  become: true
+  roles:
+      - chrony
 
 - name: setup logging bash
   hosts:
