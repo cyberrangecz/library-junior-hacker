@@ -18,3 +18,7 @@
   scm: git
   version: 1.0.0
 
+- name: kypo-man-logging-forward
+  src: git@gitlab.ics.muni.cz:muni-kypo-crp/backend-python/ansible-networking-stage/kypo-man-logging-forward.git
+  scm: git
+  version: master

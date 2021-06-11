@@ -65,7 +65,13 @@
     - role: sandbox-logging-msf
 
 - hosts: man
+  gather_facts: no
   become: true
+  vars:
+    central_syslog_ip: 78.128.251.179
+  roles:
+    - role: kypo-man-logging-forward
+      kmlf_destination: '{{ kypo_global_head_ip | default(central_syslog_ip) }}'
   tasks:
     - name: Replace the version of syslog-ng on MAN
       replace:
