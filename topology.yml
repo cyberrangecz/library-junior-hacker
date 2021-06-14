@@ -9,13 +9,13 @@ hosts:
 
   - name: server
     base_box: 
-      image: munikypo/debian-10-x86_64
+      image: munikypo/debian-10
       man_user: debian
     flavor: csirtmu.tiny1x2
 
   - name: client
     base_box: 
-      image: munikypo/debian-10-x86_64
+      image: munikypo/debian-10
       man_user: debian
     flavor: csirtmu.tiny1x2
 
@@ -23,7 +23,7 @@ routers:
   - name: router
     cidr: 100.100.100.0/29
     base_box:
-      image: debian-9-x86_64
+      image: munikypo/debian-10
       man_user: debian
     flavor: csirtmu.tiny1x2
 
