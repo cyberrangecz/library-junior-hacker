@@ -1,24 +1,24 @@
 - name: sandbox-logging-bash
-  src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/sandbox-logging-bash.git
+  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/sandbox-logging-bash.git
   scm: git
   version: 1.0.1
 
 - name: sandbox-logging-msf
-  src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/sandbox-logging-msf.git
+  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/sandbox-logging-msf.git
   scm: git
   version: 1.0.1
 
 - name: sandbox-logging-forward
-  src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/sandbox-logging-forward.git
+  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/sandbox-logging-forward.git
   scm: git
   version: 1.0.1
 
 - name: chrony
-  src: git@gitlab.ics.muni.cz:muni-kypo/ansible-roles/chrony.git
+  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/chrony.git
   scm: git
   version: 1.0.1
 
 - name: kypo-man-logging-forward
-  src: git@gitlab.ics.muni.cz:muni-kypo-crp/backend-python/ansible-networking-stage/kypo-man-logging-forward.git
+  src: https://gitlab.ics.muni.cz/muni-kypo-crp/backend-python/ansible-networking-stage/kypo-man-logging-forward.git
   scm: git
   version: 1.0.0
