@@ -1,7 +1,5 @@
 name: junior-hacker-sandbox
 
-provider: OpenStack
-
 hosts:
   - name: attacker
     base_box: 
