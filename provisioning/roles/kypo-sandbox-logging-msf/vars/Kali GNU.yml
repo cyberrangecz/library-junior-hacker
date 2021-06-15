@@ -1,4 +1,0 @@
----
-kslm_syslog_usr: root
-kslm_syslog_grp: root
-kslm_interface_name: eth1
