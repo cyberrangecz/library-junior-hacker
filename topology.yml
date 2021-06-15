@@ -8,7 +8,7 @@ hosts:
     flavor: csirtmu.tiny1x2
 
   - name: server
-    base_box: 
+    base_box:
       image: munikypo/debian-10
       man_user: debian
     flavor: csirtmu.tiny1x2
