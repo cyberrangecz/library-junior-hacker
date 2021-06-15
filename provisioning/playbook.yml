@@ -10,7 +10,7 @@
 
 # Installation and configuration of each host
 - name: Configuring devices separately
-  hosts: all
+  hosts: hosts
   become: yes
   tasks:
   - name: include role
@@ -18,15 +18,6 @@
       name: "{{ inventory_hostname }}"
 
 # Enable logging
-- hosts: attacker
-  become: true
-  pre_tasks:
-    - name: "Start and enable NTP service for time sync"
-      service:
-        name: ntp
-        state: started
-        enabled: yes
-
 - hosts: attacker
   become: true
   tasks:
@@ -39,14 +30,12 @@
         url: https://archive.kali.org/archive-key.asc
         state: present
 
-- name: Add MAN IP Fact
-  hosts: man
-  gather_facts: no
-  tasks:
-    - set_fact:
-        man_ip_address: '10.1.26.100'
+- hosts: attacker
+  become: true
+  roles:
+      - chrony
 
-- name: setup logging
+- name: setup logging bash
   hosts:
     - attacker
     - server
@@ -56,19 +45,33 @@
   become_user: root
   vars:
     student_id: 0
+    sandbox_name: junior-hacker-local
+    local_man_ip: 10.1.26.100
   roles:
-    - { role: kypo-sandbox-logging-forward, kslf_sandbox_name: 'junior-hacker-local', kslf_man_ip: '10.1.26.100', kslf_pool_id: 1, kslf_sandbox_id: "{{ student_id }}" }
-    - role: kypo-sandbox-logging-bash
-    - role: kypo-sandbox-logging-msf
+    - role: sandbox-logging-forward
+      slf_destination: '{{ hostvars["man"].ansible_host | default(local_man_ip) }}'
+      slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id | default(student_id) }}"
+      slf_sandbox_name: '{{ kypo_global_sandbox_name | default(sandbox_name) }}'
+      slf_pool_id: '{{ kypo_global_pool_id | default(None) }}'
+    - role: sandbox-logging-bash
 
-- name: Run syslog server
-  hosts: man
+- name: setup logging msf
+  hosts:
+    - attacker
+  gather_facts: yes
   become: yes
+  become_user: root
   roles:
-    - { role: kypo-man-logging-forward, kmlf_syslog_target_host: '78.128.251.179'}
+    - role: sandbox-logging-msf
 
 - hosts: man
+  gather_facts: no
   become: true
+  vars:
+    central_syslog_ip: 78.128.251.179
+  roles:
+    - role: kypo-man-logging-forward
+      kmlf_destination: '{{ kypo_global_head_ip | default(central_syslog_ip) }}'
   tasks:
     - name: Replace the version of syslog-ng on MAN
       replace:
@@ -81,38 +84,3 @@
         state: restarted
         enabled: yes
 
-- name: Fix BASH logging for root at attacker
-  hosts: attacker
-  become: yes
-  tasks:
-    - name: "Source all of ~/.bashrc.d/* to .bashrc"
-      blockinfile:
-       dest: "/etc/bash.bashrc"
-       block: |
-          if [ -d /etc/bashrc.d ]; then
-          for f in /etc/bashrc.d/*.sh; do
-              if [ -r $f ]; then
-                  . $f
-              fi
-          done
-          unset f
-          fi
-       marker: '# {mark} source bashrc.d'
-       insertafter: EOF
-       create: no
-    - name: Ensures /etc/bashrc.d/ exists
-      file:
-        path: "/etc/bashrc.d/"
-        state: "directory"
-    - name: "Setup bash command monitoring"
-      copy:
-        src: /etc/profile.d/log_commands.sh
-        dest: /etc/bashrc.d/log_commands.sh
-        remote_src: yes
-        mode: 0644
-    - name: "Add history configuration to /etc/bashrc.d/history.sh"
-      copy:
-        src: /etc/profile.d/history.sh
-        dest: /etc/bashrc.d/history.sh
-        remote_src: yes
-        mode: 0755

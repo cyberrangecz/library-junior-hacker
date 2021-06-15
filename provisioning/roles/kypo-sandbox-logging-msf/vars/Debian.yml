@@ -1,4 +1,0 @@
----
-kslm_syslog_usr: debian
-kslm_syslog_grp: debian
-kslm_interface_name: eth1
