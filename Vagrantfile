@@ -14,6 +14,10 @@ Vagrant.configure("2") do |config|
       vb.memory = 2048
       vb.cpus = 1
     end
+    device.vm.synced_folder ".",
+      "/vagrant",
+      type: "rsync",
+      rsync__exclude: ".git/"
     device.vm.network "private_network",
       virtualbox__intnet: "switch",
       ip: "10.1.26.1",
@@ -28,6 +32,10 @@ Vagrant.configure("2") do |config|
       vb.memory = 2048
       vb.cpus = 1
     end
+    device.vm.synced_folder ".",
+      "/vagrant",
+      type: "rsync",
+      rsync__exclude: ".git/"
     device.vm.network "private_network",
       virtualbox__intnet: "switch",
       ip: "10.1.26.23",
@@ -42,6 +50,10 @@ Vagrant.configure("2") do |config|
       vb.memory = 2048
       vb.cpus = 1
     end
+    device.vm.synced_folder ".",
+      "/vagrant",
+      type: "rsync",
+      rsync__exclude: ".git/"
     device.vm.network "private_network",
       virtualbox__intnet: "switch",
       ip: "10.1.26.9",
@@ -56,6 +68,10 @@ Vagrant.configure("2") do |config|
       vb.memory = 2048
       vb.cpus = 1
     end
+    device.vm.synced_folder ".",
+      "/vagrant",
+      type: "rsync",
+      rsync__exclude: ".git/"
     device.vm.network "private_network",
       virtualbox__intnet: "switch",
       ip: "10.1.26.4",
