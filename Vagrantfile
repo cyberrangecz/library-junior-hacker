@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "router"
     device.vm.box = "munikypo/debian-10"
     device.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
+      vb.memory = 256
       vb.cpus = 1
     end
     device.vm.synced_folder ".",
@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "server"
     device.vm.box = "munikypo/debian-10"
     device.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
+      vb.memory = 1024
       vb.cpus = 1
     end
     device.vm.synced_folder ".",
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
     device.vm.hostname = "client"
     device.vm.box = "munikypo/debian-10"
     device.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
+      vb.memory = 1024
       vb.cpus = 1
     end
     device.vm.synced_folder ".",
