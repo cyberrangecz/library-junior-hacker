@@ -46,10 +46,10 @@
   vars:
     student_id: 0
     sandbox_name: junior-hacker-local
-    local_man_ip: 10.1.26.100
+    central_syslog_ip: 78.128.251.179
   roles:
     - role: sandbox-logging-forward
-      slf_destination: '{{ hostvars["man"].ansible_host | default(local_man_ip) }}'
+      slf_destination: '{% if hostvars["man"] is defined %} hostvars["man"].ansible_host {% else %} central_syslog_ip {% endif %}'
       slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id | default(student_id) }}"
       slf_sandbox_name: '{{ kypo_global_sandbox_name | default(sandbox_name) }}'
       slf_pool_id: '{{ kypo_global_pool_id | default(None) }}'
@@ -63,24 +63,3 @@
   become_user: root
   roles:
     - role: sandbox-logging-msf
-
-- hosts: man
-  gather_facts: no
-  become: true
-  vars:
-    central_syslog_ip: 78.128.251.179
-  roles:
-    - role: kypo-man-logging-forward
-      kmlf_destination: '{{ kypo_global_head_ip | default(central_syslog_ip) }}'
-  tasks:
-    - name: Replace the version of syslog-ng on MAN
-      replace:
-        path: /etc/syslog-ng/syslog-ng.conf
-        regexp: '28'
-        replace: '19'
-    - name: Restart the syslog-ng service
-      service:
-        name: syslog-ng
-        state: restarted
-        enabled: yes
-
