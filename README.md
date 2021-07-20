@@ -4,6 +4,8 @@ This cybersecurity game allows a **hands-on demonstration and practice** of topi
 
 Please follow the [general instructions](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index) to set up the game.
 
+If you use the game in any published research, do not forget to [cite it](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#how-to-cite-the-games).
+
 ## Credits
 
 [Cybersecurity Laboratory](https://cybersec.fi.muni.cz)\
