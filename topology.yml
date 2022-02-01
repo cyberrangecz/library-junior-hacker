@@ -21,7 +21,6 @@ hosts:
 
 routers:
   - name: router
-    cidr: 100.100.100.0/29
     base_box:
       image: munikypo/debian-10
       man_user: debian
