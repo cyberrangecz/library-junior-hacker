@@ -12,6 +12,14 @@
         value: '1'
       vars: {}
 
+    - name: Set up postrouting
+      iptables:
+        table: nat
+        chain: POSTROUTING
+        jump: SNAT
+        out_interface: '{{ ansible_default_ipv4.interface }}'
+        to_source: '{{ ansible_default_ipv4.address }}'
+
 
 - name: Linux configuration
   hosts: ssh
@@ -49,20 +57,6 @@
   become_method: runas
   become_user: windows
   tasks: []
-
-
-- name: Border router configuration
-  hosts: br
-  become: yes
-  tasks:
-
-    - name: Set up postrouting
-      iptables:
-        table: nat
-        chain: POSTROUTING
-        jump: SNAT
-        out_interface: '{{ ansible_default_ipv4.interface }}'
-        to_source: '{{ ansible_default_ipv4.address }}'
 
 
 - name: Controller configuration

@@ -22,3 +22,8 @@
   src: https://gitlab.ics.muni.cz/muni-kypo-crp/backend-python/ansible-networking-stage/kypo-man-logging-forward.git
   scm: git
   version: 1.0.0
+
+- name: hosts-aliases
+  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/hosts-aliases.git
+  scm: git
+  version: 1.0.0
