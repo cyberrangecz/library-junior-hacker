@@ -3,7 +3,7 @@ name: junior-hacker-sandbox
 hosts:
   - name: attacker
     base_box: 
-      image: kali-2020.4
+      image: kali
       mgmt_user: debian
     flavor: csirtmu.tiny1x2
 
@@ -22,7 +22,7 @@ hosts:
 routers:
   - name: router
     base_box:
-      image: debian-10-x86_64
+      image: debian-10
       mgmt_user: debian
     flavor: csirtmu.tiny1x2
 

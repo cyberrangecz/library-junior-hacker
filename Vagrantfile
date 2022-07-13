@@ -53,7 +53,7 @@ Vagrant.configure("2") do |config|
   # Device(host): attacker
   config.vm.define "attacker" do |device|
     device.vm.hostname = "attacker"
-    device.vm.box = "munikypo/kali-2020.4"
+    device.vm.box = "munikypo/kali"
     device.vm.provider "virtualbox" do |vb|
       vb.memory = 2048
       vb.cpus = 1
