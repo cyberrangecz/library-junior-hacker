@@ -52,7 +52,4 @@ router_mappings:
       network: switch
       ip: 10.1.26.1
 
-groups:
-  - name: user-accessible
-    nodes:
-      - attacker
+groups: []
