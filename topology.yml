@@ -31,25 +31,30 @@ wan:
   cidr: 100.100.100.0/24
 
 networks:
-  - name: switch
+  - name: target-switch
     cidr: 10.1.26.0/24
+  - name: attacker-switch
+    cidr: 10.1.27.0/24
 
 net_mappings:
     - host: attacker
-      network: switch
-      ip: 10.1.26.23
+      network: attacker-switch
+      ip: 10.1.27.23
 
     - host: server
-      network: switch
+      network: target-switch
       ip: 10.1.26.9
 
     - host: client
-      network: switch
+      network: target-switch
       ip: 10.1.26.4
 
 router_mappings:
     - router: router
-      network: switch
+      network: target-switch
       ip: 10.1.26.1
+    - router: router
+      network: attacker-switch
+      ip: 10.1.27.1
 
 groups: []
