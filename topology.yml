@@ -33,6 +33,7 @@ wan:
 networks:
   - name: target-switch
     cidr: 10.1.26.0/24
+    accessible_by_user: False
   - name: attacker-switch
     cidr: 10.1.27.0/24
 
