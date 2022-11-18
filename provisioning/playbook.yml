@@ -49,7 +49,7 @@
   roles:
     - role: sandbox-logging-forward
       slf_destination: '{% if hostvars["man"] is defined -%} {{ hostvars["man"].ansible_host }} {%- else -%} {{ central_syslog_ip }} {%- endif %}'
-      slf_sandbox_id: "{{ kypo_global_sandbox_allocation_unit_id | default(student_id) | default(0) }}"
+      slf_sandbox_id: "{{ kypo_global_sandbox_id | default(student_id) | default(0) }}"
       slf_sandbox_name: '{{ kypo_global_sandbox_name | default(sandbox_name) }}'
       slf_pool_id: '{{ kypo_global_pool_id | default(None) }}'
     - role: sandbox-logging-bash
