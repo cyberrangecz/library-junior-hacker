@@ -42,7 +42,6 @@
     - client
   gather_facts: yes
   become: yes
-  become_user: root
   vars:
     sandbox_name: junior-hacker-local
     central_syslog_ip: 78.128.251.179
@@ -59,6 +58,5 @@
     - attacker
   gather_facts: yes
   become: yes
-  become_user: root
   roles:
     - role: sandbox-logging-msf
