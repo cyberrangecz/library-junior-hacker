@@ -11,55 +11,26 @@
       path: /etc/hosts
       line: "{{ item.value }} {{ item.key }}"
 
-- name: copy invoices2019.zip
+- name: copy files
   copy:
-      src: ../files/invoices2019.zip
-      dest: /home/admin/invoices2019.zip
+      src: "{{ item }}"
+      dest: "/home/admin/{{ item }}"
       owner: admin
       mode: '640'
-
-- name: copy Croatia 2019
-  copy:
-      src: ../files/Croatia 2019/
-      dest: /home/admin/Croatia 2019/
-      owner: admin
-      mode: '640'
-
-- name: copy Italy 2018
-  copy:
-      src: ../files/Italy 2018/
-      dest: /home/admin/Italy 2018/
-      owner: admin
-      mode: '640'
-
-- name: copy Mydata file
-  copy:
-      src: ../files/Mydata.xlsx
-      dest: /home/admin/Mydata.xlsx
-      owner: admin
-      mode: '640'
-
-- name: copy Romeo-and-Juliet file
-  copy:
-      src: ../files/Romeo-and-Juliet.pdf
-      dest: /home/admin/Romeo-and-Juliet.pdf
-      owner: admin
-      mode: '640'
-
-- name: copy Treasure-Island.pdf file
-  copy:
-      src: ../files/Treasure-Island.pdf
-      dest: /home/admin/Treasure-Island.pdf
-      owner: admin
-      mode: '640'
+  loop: "{{ files }}"
 
 - name: install nfs server
-  action: apt pkg=nfs-kernel-server state=present update_cache=yes
+  apt: 
+    pkg: nfs-kernel-server 
+    state: present
+    update_cache: yes
   tags:
     - nfs
 
 - name: ensure nfs service is running (Ubuntu)
-  action: service name={{item}} state=started
+  service: 
+    name: "{{ item }}" 
+    state: started
   tags:
     - nfs
   with_items:

@@ -1,5 +1,11 @@
 aliases:
   server: 10.1.26.9
 routings: []
-
+files:
+  - Croatia 2019
+  - Italy 2018
+  - Mydata.xlsx
+  - Romeo-and-Juliet.pdf
+  - Treasure-Island.pdf
+  - invoices2019.zip
 
