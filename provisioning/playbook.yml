@@ -17,6 +17,15 @@
     include_role:
       name: "{{ inventory_hostname }}"
 
+# Enable SSH access to attacker
+- name: Configuring hosts
+  hosts: attacker
+  become: yes
+  roles:
+    - role: kypo-user-access
+      kypo_user_access_username: 'kali'
+      kypo_user_access_password: 'kali'
+
 # Enable logging
 - hosts: attacker
   become: true
@@ -42,7 +51,6 @@
     - client
   gather_facts: yes
   become: yes
-  become_user: root
   vars:
     sandbox_name: junior-hacker-local
     central_syslog_ip: 78.128.251.179
@@ -59,6 +67,5 @@
     - attacker
   gather_facts: yes
   become: yes
-  become_user: root
   roles:
     - role: sandbox-logging-msf
