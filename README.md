@@ -1,12 +1,26 @@
 # Cybersecurity game "Junior hacker training"
 
-This cybersecurity game allows a **hands-on demonstration and practice** of topics such as network scanning, SSH connections, and password cracking. It is suitable for undergraduate students in computing.
+Linear game for [KYPO CRP](https://docs.crp.kypo.muni.cz/).
 
-Please follow the [general instructions](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index) to set up the game, learn more about its [licensing](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#license), and see how to [cite it](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#how-to-cite-the-games).
+## Game Levels Summary
+- connect to sandbox and read general info
+- host scan with `nmap`
+- manual password guessing at `SSH`
+- explore filesystem and transfer files with `scp`
+- zip password cracking with `fcrackzip`
+- change user password with `passwd`
 
-***Note:*** On the attacker machine (kali), the *Open console (deprecated)* and *Open console* connection options do not work anymore. Only the preferred options (*Open GUI* and *SSH access* with external client) work.
+## Topology summary
+|Host|Image|Flavor|
+|-|-|-|
+|attacker|kali|csirtmu.tiny1x2|
+|server|debian-10|csirtmu.tiny1x2|
+|client|debian-10|csirtmu.tiny1x2|
+|router|debian-10|csirtmu.tiny1x2|
 
-## Credits
+
+## License and Credits
+See [licensing](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#license) and how to [cite it](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#how-to-cite-the-games).
 
 [Cybersecurity Laboratory](https://cybersec.fi.muni.cz)\
 Faculty of Informatics\
