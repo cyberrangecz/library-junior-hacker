@@ -1,6 +1,8 @@
 # Cybersecurity game "Junior hacker training"
 
-Linear game for [KYPO CRP](https://docs.crp.kypo.muni.cz/).
+Linear game for [KYPO CRP](https://docs.crp.kypo.muni.cz/) and a sandbox created by [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/home).
+
+Follow the [general instructions](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index) to set up the game.
 
 ## Game Levels Summary
 - connect to sandbox and read general info
