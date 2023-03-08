@@ -19,7 +19,7 @@
     "estimated_duration" : 0,
     "minimal_possible_solve_time" : null,
     "passkey" : "start",
-    "cloud_content" : "Your first task is to access the sandbox, where you will complete all following tasks. After you have successfully connected, Submit the answer **`start`**.\n\n### Sandbox access\n1. In the topology overview on the right, right-click on **`attacker`** and then click on **`Open GUI`**, and a new pop-up window will appear. \n2. Login with username **`kali`** and password **`kali`**.\n\nAlternatively, you can use SSH to connect to the machine. SSH access makes it easier to copy-paste commands and flags, but requires more steps to set up. See [documentation](https://docs.crp.kypo.muni.cz/user-guide-advanced/sandboxes/sandbox-access/#user-access) for more details.",
+    "cloud_content" : "Your first task is to access the sandbox, where you will complete all following tasks. After you have successfully connected, Submit the answer **`start`**.\n\n### Sandbox access\n1. In the topology overview on the right, right-click on **`attacker`** and then click on **`Open GUI`**, and a new pop-up window will appear. \n2. Login with username **`user`** and password **`Password123`**.\n\nAlternatively, you can use SSH to connect to the machine. SSH access makes it easier to copy-paste commands and flags, but requires more steps to set up. See [documentation](https://docs.crp.kypo.muni.cz/user-guide-advanced/sandboxes/sandbox-access/#user-access) for more details.",
     "local_content" : "This sandbox has not been tested for use with local sandbox."
   }, {
     "title" : "Getting to know the environment",
@@ -55,7 +55,7 @@
     "answer" : "2049",
     "answer_variable_name" : null,
     "content" : "You already managed to guess the password on a Wi-Fi router with the master's help (12345678, really?!), so you have already accessed the local network of one household. At the same time, you saw the other machines' IP addresses in the router's web UI. There are 2 machines with IP addresses: 10.1.26.4 and 10.1.26.9. \n\nThe master told you that your goal is to gain access to the server. Since there 2 machines in the network, scan the hosts and recognize the server's IP address. You can recognize the server by its running services.\n\nThe flag is the port number on which the file sharing service is running on the server's machine.",
-    "solution" : "```\nkali@attacker:~# nmap 10.1.26.4\n\nkali@attacker:~# nmap 10.1.26.9\n2049/tcp open  nfs\n```",
+    "solution" : "```\nuser@attacker:~# nmap 10.1.26.4\n\nuser@attacker:~# nmap 10.1.26.9\n2049/tcp open  nfs\n```",
     "solution_penalized" : true,
     "hints" : [ {
       "title" : "What tool to use?",
@@ -99,7 +99,7 @@
     "answer" : "ssh admin@10.1.26.9",
     "answer_variable_name" : null,
     "content" : "You know the IP address of the server, it was easy, right? Now comes the more interesting part of how to use this knowledge to your advantage. Connect remotely to the server and use legitimate credentials. The master told you that the login details will most likely one of these: admin/password, admin/123456 or admin/admin. It's worth trying, isn't it?\n\nThe flag is the entire command for logging into the server. ",
-    "solution" : "```\nkali@attacker:~# ssh admin@10.1.26.9\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nadmin@10.1.26.9's password: admin\n```",
+    "solution" : "```\nuser@attacker:~# ssh admin@10.1.26.9\nAre you sure you want to continue connecting (yes/no/[fingerprint])? yes\nadmin@10.1.26.9's password: admin\n```",
     "solution_penalized" : true,
     "hints" : [ {
       "title" : "What is the syntax for entering the SSH command?",
@@ -141,7 +141,7 @@
     "answer" : "invoices2019.zip",
     "answer_variable_name" : null,
     "content" : "You are already logged in to the server. Now is the time to find something exciting and ideally compromising, but we don't know exactly what we are looking for. However... do you still remember the list of services running on the server based on the Nmap scan? You already discovered that the server runs the NFS service. NFS protocol is used for file sharing and remote access to files over a computer network. Maybe this server is used to back up data. Try to look whether the admin's home directory stores any files. Then, copy a useful file to your attacker machine.\n\nThe flag is the name of the only ZIP file (including the extension) located in the home directory. ",
-    "solution" : "```\nkali@attacker:/home# scp admin@10.1.26.9:~/invoices2019.zip .\nadmin@10.1.26.9's password: admin\n```",
+    "solution" : "```\nuser@attacker:/home# scp admin@10.1.26.9:~/invoices2019.zip .\nadmin@10.1.26.9's password: admin\n```",
     "solution_penalized" : true,
     "hints" : [ {
       "title" : "Where to look for the files?",
@@ -183,7 +183,7 @@
     "answer" : "IhateMyJob",
     "answer_variable_name" : null,
     "content" : "You have found out that some accounting company's files have been uploaded to this server. And you have a ZIP file with a promising name in your hands, but unfortunately, it is password-protected. The master advised you that a password cracking tool called Fcrackzip was installed on his Kali machine. Find out how you could break the password and reveal the content of the ZIP. \n\nThe flag is the password to the ZIP.",
-    "solution" : "```\nkali@attacker:~# fcrackzip -D -u -p /usr/share/wordlists/fasttrack.txt invoices2019.zip\n\nPASSWORD FOUND!!!!: pw == IhateMyJob\n\nkali@attacker:/home# unzip invoices2019.zip \n\nArchive:  invoices2019.zip\n   creating: invoices2019/\n[invoices2019.zip] invoices2019/TAX15796252.txt password: IhateMyJob\n```",
+    "solution" : "```\nuser@attacker:~# fcrackzip -D -u -p /usr/share/wordlists/fasttrack.txt invoices2019.zip\n\nPASSWORD FOUND!!!!: pw == IhateMyJob\n\nuser@attacker:/home# unzip invoices2019.zip \n\nArchive:  invoices2019.zip\n   creating: invoices2019/\n[invoices2019.zip] invoices2019/TAX15796252.txt password: IhateMyJob\n```",
     "solution_penalized" : true,
     "hints" : [ {
       "title" : "Where is the wordlist stored?",
