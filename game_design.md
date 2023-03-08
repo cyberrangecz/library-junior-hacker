@@ -25,7 +25,7 @@ The master handed you a laptop, saying to you: "You studied hard in the past wee
 
 Firstly, Kali is not just another Linux-based system. It contains many handy hacking tools, which I want you to try today. We can't avoid using Nmap, which is a tool for network scanning: it prints the IP addresses of connected hosts and their running services. But my all-time favorite tools are for password cracking, such as John the ripper, Hydra, or fcrackzip. We will try to find an opportunity for you to try some of them out. When the time is right for using the tool, I'll tell you. If you can't figure out how to use the tool, write the suffix `--help` to get detailed instructions.
 
-Secondly, get acquainted with the command line that you will use to work with Kali Linux. Log in as the user `kali` with the password `kali`, look around your file system, and note the arrangement of files and directories. You will need this knowledge when you hack into another Linux machine."
+Secondly, get acquainted with the command line that you will use to work with Kali Linux. Log in as the user `user` with the password `Password123`, look around your file system, and note the arrangement of files and directories. You will need this knowledge when you hack into another Linux machine."
 
 The flag for this level is the command suffix (option) used for printing more information about some tool (there are two possibilities, submit the longer one).
 

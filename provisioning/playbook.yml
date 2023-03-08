@@ -23,8 +23,9 @@
   become: yes
   roles:
     - role: kypo-user-access
-      kypo_user_access_username: 'kali'
-      kypo_user_access_password: 'kali'
+      kypo_user_access_username: user
+      kypo_user_access_password: Password123
+      kypo_user_access_sudo: True
 
 # Enable logging
 - hosts: attacker
