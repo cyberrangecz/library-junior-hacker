@@ -31,4 +31,5 @@
 - name: kypo-user-access
   src: https://gitlab.ics.muni.cz/muni-kypo-crp/backend-python/ansible-networking-stage/kypo-user-access.git
   scm: git
-  version: 23a10391
+  version: 470b8b91
+
