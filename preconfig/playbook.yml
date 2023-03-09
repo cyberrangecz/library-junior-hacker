@@ -34,7 +34,7 @@
       lineinfile:
         line: '{{ item.key }} {{ item.value }}'
         path: /etc/hosts
-      loop: '{{ device_aliases | dict2items }}'
+      with_dict: '{{ device_aliases }}'
 
     - name: Configure routes
       include_role:
@@ -53,10 +53,14 @@
 
 - name: Windows configuration
   hosts: winrm
-  become: yes
-  become_method: runas
-  become_user: windows
-  tasks: []
+  tasks:
+
+    - name: Add aliases of all devices
+      win_hosts:
+        state: present
+        canonical_name: '{{ item.value }}'
+        ip_address: '{{ item.key }}'
+      with_dict: '{{ device_aliases }}'
 
 
 - name: Controller configuration
@@ -68,4 +72,16 @@
       pip:
         name: pywinrm
         executable: "pip3"
+
+- name: Fix networking at attacker
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: Add IP 10.1.27.23/24 to eth1 interface
+      command: ip a add 10.1.27.23/24 dev eth1
+      ignore_errors: true
+    - name: Set default GW to 10.1.27.1
+      command: ip r add default via 10.1.27.1 dev eth1
+      ignore_errors: true
+
 ...
