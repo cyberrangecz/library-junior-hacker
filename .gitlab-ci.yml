@@ -11,6 +11,10 @@ workflow:
       when: never
     - when: always
 
+default:
+  tags:
+    - image-builder
+
 test-vagrant:
   stage: test
   script:
