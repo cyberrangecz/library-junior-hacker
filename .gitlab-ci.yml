@@ -1,0 +1,18 @@
+image: registry.gitlab.ics.muni.cz:443/muni-kypo-images/docker-image-builder/packer:latest
+
+stages:
+  - test
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - when: always
+
+test-vagrant:
+  stage: test
+  script:
+    - vagrant up
+    - vagrant destroy -f
