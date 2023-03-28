@@ -21,6 +21,6 @@ test-vagrant:
     - apt-get update
     - apt-get install rsync -y
 # Add 'vb.gui = false' after every 'device.vm.provider "virtualbox" do |vb|'
-    - sed -E 's/((\s+)device\.vm\.provider\s+"virtualbox"\s+do\s+\|([^\|]+)\|)/\1\n\2  \3.gui = false/' Vagrantfile
+    - sed -i -E 's/((\s+)device\.vm\.provider\s+"virtualbox"\s+do\s+\|([^\|]+)\|)/\1\n\2  \3.gui = false/' Vagrantfile
     - vagrant up
     - vagrant destroy -f
