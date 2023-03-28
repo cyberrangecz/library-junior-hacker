@@ -18,5 +18,6 @@ default:
 test-vagrant:
   stage: test
   script:
+    - apt-get install rsync -y
     - vagrant up
     - vagrant destroy -f
