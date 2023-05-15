@@ -1,9 +1,18 @@
-variable "CI_COMMIT_SHA" {}
+terraform {
+  required_providers {
+    kypo = {
+      source = "vydrazde/kypo"
+      version = "0.1.0-beta"
+    }
+  }
+}
 
 provider "kypo" {
   endpoint  = "https://images.crp.kypo.muni.cz"
   client_id = "bzhwmbxgyxALbAdMjYOgpolQzkiQHGwWRXxm"
 }
+
+variable "CI_COMMIT_SHA" {}
 
 resource "kypo_sandbox_definition" "definition" {
   url = "git@gitlab.ics.muni.cz:muni-kypo-trainings/games/junior-hacker.git"
