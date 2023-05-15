@@ -28,6 +28,7 @@ resource "kypo_sandbox_pool" "pool" {
 
 resource "kypo_sandbox_allocation_unit" "sandbox" {
   pool_id = kypo_sandbox_pool.pool.id
+  warning_on_allocation_failure = true
 }
 
 data "kypo_sandbox_request_output" "user-output" {
