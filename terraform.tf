@@ -16,7 +16,7 @@ variable "CI_COMMIT_SHA" {}
 
 resource "kypo_sandbox_definition" "definition" {
   url = "git@gitlab.ics.muni.cz:muni-kypo-trainings/games/junior-hacker.git"
-  rev = var.COMMIT_SHA
+  rev = var.CI_COMMIT_SHA
 }
 
 resource "kypo_sandbox_pool" "pool" {
