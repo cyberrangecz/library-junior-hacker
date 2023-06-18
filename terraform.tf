@@ -7,6 +7,10 @@ terraform {
       source = "vydrazde/kypo"
       version = "0.1.0-beta"
     }
+    gitlab = {
+      source = "gitlabhq/gitlab"
+      version = "16.0.3"
+    }
   }
 }
 
@@ -15,8 +19,13 @@ provider "kypo" {
   client_id = "bzhwmbxgyxALbAdMjYOgpolQzkiQHGwWRXxm"
 }
 
+provider "gitlab" {
+  token = var.CI_JOB_TOKEN
+}
+
 variable "CI_COMMIT_SHA" {}
 variable "CI_PROJECT_ID" {}
+variable "CI_JOB_TOKEN" {}
 
 data "gitlab_project" "gitlab_project" {
   id = var.CI_PROJECT_ID
