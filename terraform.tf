@@ -16,9 +16,14 @@ provider "kypo" {
 }
 
 variable "CI_COMMIT_SHA" {}
+variable "CI_PROJECT_ID" {}
+
+data "gitlab_project" "gitlab_project" {
+  id = var.CI_PROJECT_ID
+}
 
 resource "kypo_sandbox_definition" "definition" {
-  url = "git@gitlab.ics.muni.cz:muni-kypo-trainings/games/junior-hacker.git"
+  url = data.gitlab_project.gitlab_project.ssh_url_to_repo
   rev = var.CI_COMMIT_SHA
 }
 
