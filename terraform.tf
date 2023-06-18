@@ -15,8 +15,8 @@ provider "kypo" {
   client_id = "bzhwmbxgyxALbAdMjYOgpolQzkiQHGwWRXxm"
 }
 
+variable "CI_PROJECT_URL" {}
 variable "CI_COMMIT_SHA" {}
-variable "CI_PROJECT_ID" {}
 
 resource "kypo_sandbox_definition" "definition" {
   url = "${replace(var.CI_PROJECT_URL, "/https://([^/]+)/(.+)/", "git@$1:$2.git")}"

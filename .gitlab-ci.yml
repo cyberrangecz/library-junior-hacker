@@ -15,7 +15,6 @@ workflow:
 variables:
   TF_ROOT: ${CI_PROJECT_DIR}
   TF_STATE_NAME: default
-  TF_VAR_CI_JOB_TOKEN: ${CI_JOB_TOKEN}
 
 .test-vagrant:
   image: registry.gitlab.ics.muni.cz:443/muni-kypo-images/docker-image-builder/packer:latest
