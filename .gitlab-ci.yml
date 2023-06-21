@@ -58,4 +58,4 @@ terraform-destroy:
     key: "${TF_ROOT}"
     paths:
       - ${TF_ROOT}/.terraform/
-
+  when: manual
