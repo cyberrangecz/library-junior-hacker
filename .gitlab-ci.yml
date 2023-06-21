@@ -34,8 +34,8 @@ test-kypo:
   resource_group: ${TF_STATE_NAME}
   environment:
     name: $TF_STATE_NAME
-    action: start
     on_stop: terraform-destroy
+    auto_stop_in: 1 week
   cache:
     key: "${TF_ROOT}"
     paths:
@@ -58,5 +58,4 @@ terraform-destroy:
     key: "${TF_ROOT}"
     paths:
       - ${TF_ROOT}/.terraform/
-  when: delayed
-  start_in: 1 week
+
