@@ -30,6 +30,7 @@ test-kypo:
   stage: test
   script:
     - gitlab-terraform plan
+    - gitlab-terraform plan-json
     - gitlab-terraform apply
   resource_group: ${TF_STATE_NAME}
   cache:
@@ -41,6 +42,8 @@ test-kypo:
       - ${TF_ROOT}/user-ansible.txt
       - ${TF_ROOT}/networking-ansible.txt
       - ${TF_ROOT}/terraform.txt
+    reports:
+      terraform: ${TF_ROOT}/plan.json
 
 terraform-destroy:
   stage: cleanup
