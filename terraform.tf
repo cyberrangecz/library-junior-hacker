@@ -63,3 +63,16 @@ resource "local_file" "terraform-output" {
   content  = data.kypo_sandbox_request_output.terraform-output.result
   filename = "terraform.txt"
 }
+
+resource "null_resource" "check" {
+  triggers = {
+    stages = join(", ", kypo_sandbox_allocation_unit.sandbox.allocation_request.stages)
+  }
+
+  lifecycle {
+    postcondition {
+      condition     = join(", ", kypo_sandbox_allocation_unit.sandbox.allocation_request.stages) == "FINISHED, FINISHED, FINISHED"
+      error_message = "Allocation has finished with errors"
+    }
+  }
+}
