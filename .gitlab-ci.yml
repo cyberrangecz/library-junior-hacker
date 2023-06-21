@@ -32,6 +32,10 @@ test-kypo:
     - gitlab-terraform plan
     - gitlab-terraform apply
   resource_group: ${TF_STATE_NAME}
+  environment:
+    name: $TF_STATE_NAME
+    action: start
+    on_stop: terraform-destroy
   cache:
     key: "${TF_ROOT}"
     paths:
@@ -47,6 +51,9 @@ terraform-destroy:
   script:
     - gitlab-terraform destroy
   resource_group: ${TF_STATE_NAME}
+  environment:
+    name: $TF_STATE_NAME
+    action: stop
   cache:
     key: "${TF_ROOT}"
     paths:
