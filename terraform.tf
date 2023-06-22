@@ -5,7 +5,7 @@ terraform {
   required_providers {
     kypo = {
       source = "vydrazde/kypo"
-      version = "0.1.0-beta"
+      version = ">= 0.1.0"
     }
   }
 }
