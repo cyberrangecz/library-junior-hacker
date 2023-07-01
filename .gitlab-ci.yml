@@ -42,9 +42,8 @@ test-kypo:
       - ${TF_ROOT}/.terraform/
   artifacts:
     paths:
-      - ${TF_ROOT}/user-ansible.txt
-      - ${TF_ROOT}/networking-ansible.txt
-      - ${TF_ROOT}/terraform.txt
+      - ${TF_ROOT}/outputs/
+    when: always
 
 terraform-destroy:
   stage: cleanup

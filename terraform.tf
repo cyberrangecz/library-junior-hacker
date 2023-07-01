@@ -49,7 +49,7 @@ data "kypo_sandbox_request_output" "output" {
 
 resource "local_file" "output" {
   content         = data.kypo_sandbox_request_output.output[each.key].result
-  filename        = "p${kypo_sandbox_pool.pool.id}-s${kypo_sandbox_allocation_unit.sandbox.id}-${each.key}.txt"
+  filename        = "outputs/p${kypo_sandbox_pool.pool.id}-s${kypo_sandbox_allocation_unit.sandbox.id}-${each.key}.txt"
   file_permission = "666"
 
   for_each = local.stages
