@@ -20,12 +20,12 @@ test-kypo:
   stage: test
   script:
     - echo URL=https://aaa.ex > deploy.env
-  resource_group: ${TF_STATE_NAME}
+  resource_group: default
   environment:
     name: $TF_STATE_NAME
     url: $URL
     on_stop: terraform-destroy
-    auto_stop_in: 1 minute
+    auto_stop_in: 1 hour
   artifacts:
     reports:
       dotenv: deploy.env
@@ -34,8 +34,10 @@ terraform-destroy:
   stage: cleanup
   script:
     - echo destroyed
-  resource_group: ${TF_STATE_NAME}
+  resource_group: default
   environment:
     name: $TF_STATE_NAME
     action: stop
   when: manual
+  needs:
+    - test-kypo
