@@ -16,45 +16,26 @@ variables:
   TF_ROOT: ${CI_PROJECT_DIR}
   TF_STATE_NAME: default
 
-.test-vagrant:
-  image: registry.gitlab.ics.muni.cz:443/muni-kypo-images/docker-image-builder/packer:latest
-  stage: test
-  script:
-# Add 'vb.gui = false' after every 'device.vm.provider "virtualbox" do |vb|'
-    - sed -i -E 's/((\s+)device\.vm\.provider\s+"virtualbox"\s+do\s+\|([^\|]+)\|)/\1\n\2  \3.gui = false/' Vagrantfile
-    - vagrant up
-  tags:
-    - image-builder
-
 test-kypo:
   stage: test
   script:
-    - gitlab-terraform plan
-    - gitlab-terraform apply
+    - echo URL=aaa.ex > deploy.env
   resource_group: ${TF_STATE_NAME}
   environment:
     name: $TF_STATE_NAME
+    url: $URL
     on_stop: terraform-destroy
-    auto_stop_in: 1 week
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
+    auto_stop_in: 1 minute
   artifacts:
-    paths:
-      - ${TF_ROOT}/outputs/
-    when: always
+    reports:
+      dotenv: deploy.env
 
 terraform-destroy:
   stage: cleanup
   script:
-    - gitlab-terraform destroy
+    - echo destroyed
   resource_group: ${TF_STATE_NAME}
   environment:
     name: $TF_STATE_NAME
     action: stop
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
   when: manual
