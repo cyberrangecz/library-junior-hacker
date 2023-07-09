@@ -22,7 +22,7 @@ test-kypo:
     - echo URL=https://aaa.ex > deploy.env
   resource_group: default
   environment:
-    name: $TF_STATE_NAME
+    name: default
     url: $URL
     on_stop: terraform-destroy
     auto_stop_in: 1 hour
@@ -36,7 +36,7 @@ terraform-destroy:
     - echo destroyed
   resource_group: default
   environment:
-    name: $TF_STATE_NAME
+    name: default
     action: stop
   when: manual
   needs:
