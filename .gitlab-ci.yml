@@ -19,7 +19,7 @@ variables:
 test-kypo:
   stage: test
   script:
-    - echo URL=aaa.ex > deploy.env
+    - echo URL=https://aaa.ex > deploy.env
   resource_group: ${TF_STATE_NAME}
   environment:
     name: $TF_STATE_NAME
