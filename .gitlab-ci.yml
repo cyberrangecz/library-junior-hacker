@@ -14,7 +14,7 @@ workflow:
 
 variables:
   TF_ROOT: ${CI_PROJECT_DIR}
-  TF_STATE_NAME: default
+  TF_STATE_NAME: $CI_COMMIT_REF_SLUG
 
 .test-vagrant:
   image: registry.gitlab.ics.muni.cz:443/muni-kypo-images/docker-image-builder/packer:latest
@@ -31,30 +31,35 @@ test-kypo:
   script:
     - gitlab-terraform plan
     - gitlab-terraform apply
-  resource_group: ${TF_STATE_NAME}
+  resource_group: $TF_STATE_NAME
   environment:
     name: $TF_STATE_NAME
+    url: $POOL_URL
     on_stop: terraform-destroy
     auto_stop_in: 1 week
   cache:
-    key: "${TF_ROOT}"
+    key: $TF_STATE_NAME
     paths:
       - ${TF_ROOT}/.terraform/
   artifacts:
     paths:
-      - ${TF_ROOT}/outputs/
+      - outputs/
     when: always
+    reports:
+      dotenv: vars.env
 
 terraform-destroy:
   stage: cleanup
   script:
     - gitlab-terraform destroy
-  resource_group: ${TF_STATE_NAME}
+  resource_group: $TF_STATE_NAME
   environment:
     name: $TF_STATE_NAME
     action: stop
   cache:
-    key: "${TF_ROOT}"
+    key: $TF_STATE_NAME
     paths:
       - ${TF_ROOT}/.terraform/
   when: manual
+  needs:
+    - test-kypo
