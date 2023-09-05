@@ -1,20 +1,22 @@
-image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.4:v1.0.0
+include:
+  - project: muni-kypo-images/ci-cd-virtual-images
+    file: terraform.yml
 
 stages:
   - test
   - cleanup
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_TAG
-      when: never
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - when: always
+test-kypo:
+  extends: .terraform-build
+  stage: test
+  environment:
+    on_stop: test-kypo-cleanup
 
-variables:
-  TF_ROOT: ${CI_PROJECT_DIR}
-  TF_STATE_NAME: $CI_COMMIT_REF_SLUG
+test-kypo-cleanup:
+  extends:
+    - test-kypo
+    - .terraform-destroy
+  stage: cleanup
 
 .test-vagrant:
   image: registry.gitlab.ics.muni.cz:443/muni-kypo-images/docker-image-builder/packer:latest
@@ -25,41 +27,3 @@ variables:
     - vagrant up
   tags:
     - image-builder
-
-test-kypo:
-  stage: test
-  script:
-    - gitlab-terraform plan
-    - gitlab-terraform apply
-  resource_group: $TF_STATE_NAME
-  environment:
-    name: $TF_STATE_NAME
-    url: $POOL_URL
-    on_stop: terraform-destroy
-    auto_stop_in: 1 week
-  cache:
-    key: $TF_STATE_NAME
-    paths:
-      - ${TF_ROOT}/.terraform/
-  artifacts:
-    paths:
-      - outputs/
-    when: always
-    reports:
-      dotenv: vars.env
-
-terraform-destroy:
-  stage: cleanup
-  script:
-    - gitlab-terraform destroy
-  resource_group: $TF_STATE_NAME
-  environment:
-    name: $TF_STATE_NAME
-    action: stop
-  cache:
-    key: $TF_STATE_NAME
-    paths:
-      - ${TF_ROOT}/.terraform/
-  when: manual
-  needs:
-    - test-kypo

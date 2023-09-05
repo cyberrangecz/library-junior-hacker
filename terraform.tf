@@ -15,7 +15,7 @@ locals {
 }
 
 variable "CI_PROJECT_URL" {}
-variable "CI_COMMIT_SHA" {}
+variable "CI_COMMIT_SHORT_SHA" {}
 
 provider "kypo" {
   endpoint  = local.endpoint
@@ -23,16 +23,12 @@ provider "kypo" {
 }
 
 module "sandbox" {
-  source      = "vydrazde/sandbox/kypo"
-  project_url = var.CI_PROJECT_URL
-  rev         = var.CI_COMMIT_SHA
-}
-
-resource "local_file" "pool_url" {
-  filename = "vars.env"
-  content  = "POOL_URL=${local.pool_url}"
+  source        = "gitlab.ics.muni.cz/muni-kypo-images/sandbox-ci/kypo"
+  project_url   = var.CI_PROJECT_URL
+  rev           = var.CI_COMMIT_SHORT_SHA
+  kypo_endpoint = local.endpoint
 }
 
 output "pool_url" {
-  value = local.pool_url
+  value = module.sandbox.pool_url
 }
