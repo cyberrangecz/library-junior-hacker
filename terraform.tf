@@ -11,7 +11,6 @@ terraform {
 
 locals {
   endpoint = "https://images.crp.kypo.muni.cz"
-  pool_url = "${local.endpoint}/pool/${module.sandbox.pool_id}"
 }
 
 variable "CI_PROJECT_URL" {}
