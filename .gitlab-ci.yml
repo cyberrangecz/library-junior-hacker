@@ -1,0 +1,23 @@
+include:
+  - project: muni-kypo-images/ci-cd-virtual-images
+    file: terraform.yml
+  - project: muni-kypo-images/ci-cd-virtual-images
+    file: test-vagrant.yml
+
+stages:
+  - test
+  - cleanup
+
+test-kypo:
+  extends: .terraform-build
+  stage: test
+  environment:
+    on_stop: test-kypo-cleanup
+
+test-kypo-cleanup:
+  extends:
+    - test-kypo
+    - .terraform-destroy
+  needs:
+    - test-kypo
+  stage: cleanup
