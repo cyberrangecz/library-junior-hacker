@@ -3,7 +3,6 @@ include:
     file: terraform.yml
   - project: muni-kypo-images/ci-cd-virtual-images
     file: test-vagrant.yml
-    ref: documentation
 
 stages:
   - test
