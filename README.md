@@ -17,10 +17,10 @@ This game uses `kali` and `debian-10` images from [MUNI-KYPO-IMAGES](https://git
 ## Topology summary
 |Host|Image|Flavor|
 |-|-|-|
-|attacker|kali|csirtmu.tiny1x2|
-|server|debian-10|csirtmu.tiny1x2|
-|client|debian-10|csirtmu.tiny1x2|
-|router|debian-10|csirtmu.tiny1x2|
+|attacker|kali|standard.small|
+|server|debian-10|standard.small|
+|client|debian-10|standard.small|
+|router|debian-10|standard.small|
 
 
 ## License and Credits
