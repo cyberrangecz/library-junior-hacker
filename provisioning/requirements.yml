@@ -1,7 +1,7 @@
 - name: sandbox-logging
   src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/sandbox-logging.git
   scm: git
-  version: 5431051c
+  version: 1.0.0
 
 - name: chrony
   src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/chrony.git
