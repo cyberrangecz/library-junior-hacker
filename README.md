@@ -1,10 +1,8 @@
 # Cybersecurity game "Junior hacker training"
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-orange.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-Linear game for [KYPO CRP](https://docs.crp.kypo.muni.cz/) and a sandbox created by [Cyber Sandbox Creator](https://gitlab.ics.muni.cz/muni-kypo-csc/cyber-sandbox-creator/-/wikis/home).
-
-Follow the [general instructions](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index) to set up the game.
-
-This game uses `kali` and `debian-10` images from [MUNI-KYPO-IMAGES](https://gitlab.ics.muni.cz/muni-kypo-images), which need to be available in OpenStack for use with KYPO CRP. To get and upload the images, see [this guide](https://gitlab.ics.muni.cz/muni-kypo-images/muni-kypo-images-wiki/-/wikis/How-to-get-image-for-OpenStack).
+Linear game for [CyberRangeCZ Platform](https://docs.platform.cyberrange.cz/).
 
 ## Game Levels Summary
 - connect to sandbox and read general info
@@ -18,16 +16,24 @@ This game uses `kali` and `debian-10` images from [MUNI-KYPO-IMAGES](https://git
 |Host|Image|Flavor|
 |-|-|-|
 |attacker|kali|standard.small|
-|server|debian-10|standard.small|
-|client|debian-10|standard.small|
-|router|debian-10|standard.small|
+|server|debian-12-x86_64|standard.small|
+|client|debian-12-x86_64|standard.small|
+|router|debian-12-x86_64|standard.small|
 
+## License
 
-## License and Credits
-See [licensing](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#license) and how to [cite it](https://gitlab.ics.muni.cz/muni-kypo-trainings/games/all-games-index#how-to-cite-the-games).
+This repository uses a dual licensing approach:
 
-[Cybersecurity Laboratory](https://cybersec.fi.muni.cz)\
-Faculty of Informatics\
+* The code (Vagrant, Ansible, and custom code) is licensed under the terms of the MIT License (https://opensource.org/license/mit).
+* The game design is licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+**Attribution:**
+
+Based on the game design from:
+junior-hacker (https://gitlab.ics.muni.cz/muni-kypo-trainings/games/junior-hacker)
+
+**Cybersecurity Laboratory**
+Faculty of Informatics
 Masaryk University
 
 **Leading author:** Miriam Gáliková

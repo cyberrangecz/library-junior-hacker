@@ -1,20 +1,19 @@
 - name: sandbox-logging
-  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/sandbox-logging.git
+  src: https://github.com/cyberrangecz/ansible-role-sandbox-logging.git
   scm: git
-  version: 1.0.0
+  version: v1.0.0
 
 - name: chrony
-  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/chrony.git
+  src: https://github.com/cyberrangecz/ansible-role-chrony.git
   scm: git
   version: 1.0.1
 
-
 - name: hosts-aliases
-  src: https://gitlab.ics.muni.cz/muni-kypo/ansible-roles/hosts-aliases.git
+  src: https://github.com/cyberrangecz/ansible-role-hosts-aliases.git
   scm: git
   version: 1.0.0
 
-- name: kypo-user-access
-  src: https://gitlab.ics.muni.cz/muni-kypo-crp/backend-python/ansible-networking-stage/kypo-user-access.git
+- name: user-access
+  src: https://github.com/cyberrangecz/ansible-role-user-access.git
   scm: git
-  version: 39a4f935
+  version: v1.0.0

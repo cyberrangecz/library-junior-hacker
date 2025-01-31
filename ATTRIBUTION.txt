@@ -1,0 +1,4 @@
+The game design of this project is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+Based on the game design from:
+junior-hacker (https://gitlab.ics.muni.cz/muni-kypo-trainings/games/junior-hacker)
