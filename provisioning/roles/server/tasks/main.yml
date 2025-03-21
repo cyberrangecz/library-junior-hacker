@@ -1,35 +1,58 @@
 - name: Add the user 'admin' with a bash shell to the user's groups
   user:
-      name: admin
-      password: "{{ 'admin' | password_hash('sha512') }}"
-      create_home: yes
-      shell: /bin/bash
+    name: admin
+    password: "{{ 'admin' | password_hash('sha512') }}"
+    create_home: yes
+    shell: /bin/bash
+
+- name: Add ChallengeResponse and PasswordAuthentication config
+  blockinfile:
+    path: /etc/ssh/sshd_config.d/99-challenge-password-auth.conf
+    create: yes
+    block: |
+      ChallengeResponseAuthentication yes
+      PasswordAuthentication yes
+  notify: Reload SSH service
+
+- name: Remove ChallengeResponseAuthentication from main sshd_config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^ChallengeResponseAuthentication'
+    state: absent
+  notify: Reload SSH service
+
+- name: Remove PasswordAuthentication from main sshd_config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    state: absent
+  notify: Reload SSH service
 
 - name: Adding aliases
   loop: "{{ aliases | dict2items }}"
   lineinfile:
-      path: /etc/hosts
-      line: "{{ item.value }} {{ item.key }}"
+    path: /etc/hosts
+    line: "{{ item.value }} {{ item.key }}"
 
 - name: copy files
   copy:
-      src: "{{ item }}"
-      dest: "/home/admin/{{ item }}"
-      owner: admin
-      mode: '640'
+    src: "{{ item }}"
+    dest: "/home/admin/{{ item }}"
+    owner: admin
+    mode: '640'
   loop: "{{ files }}"
 
 - name: install nfs server
-  apt: 
-    pkg: nfs-kernel-server 
+  apt:
+    pkg: nfs-kernel-server
     state: present
     update_cache: yes
   tags:
     - nfs
 
 - name: ensure nfs service is running (Ubuntu)
-  service: 
-    name: "{{ item }}" 
+  service:
+    name: "{{ item }}"
     state: started
   tags:
     - nfs
